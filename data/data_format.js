@@ -12,27 +12,27 @@
     .get(function(error,csv) {
       data = csv;
     })
-	
-	
-  ##ADD RANKS : 
+
+
+  ##ADD RANKS :
 	data.sort(function(a,b){return b.influencing - a.influencing})
 	var rank = 1;
 	for (var i = 0; i < data.length; i++){
 		data[i].rankInfluencing = rank;
 		rank++;
 	}
-	
+
 		data.sort(function(a,b){return b.influenced - a.influenced})
 	var rank = 1;
 	for (var i = 0; i < data.length; i++){
 		data[i].rankInfluenced = rank;
 		rank++;
 	}
-	
-	
+
+
 	data.sort(function(a,b){return parseFloat(a.name) - parseFloat(b.name)})
-  
-  
+
+
   ##END add ranks
 
 		positions=[]
@@ -53,9 +53,9 @@
 				var x =  (radius)*Math.cos(theta)
 				var y =  (radius)*Math.sin(theta)
 				currentCategory = node.name.split(".")[0] ;
-				
+
 			}
-			
+
 			positions.push({"name":node.name,"x":x,"y":y});
 
 		}
@@ -263,13 +263,13 @@ switch(id) {
 
 function formatEdgesText(value){
 	reduce_value = reduction(value);
-	if (reduce_value < -2.5) return {"color":"#9C4A56", "text":"CANCELLING ("+ d3.format("+.2g")(value) +") : Makes it impossible to reach another goal"}
-	else if	(reduce_value < - 1.5) return {"color":"#D6707D", "text": "COUNTERACTING ("+ d3.format("+.2g")(value) +"): Clashed with another goal "}
-	else if	(reduce_value < - 0.5)  return {"color":"#E8AD84", "text":"CONSTRAINING ("+ d3.format("+.2g")(value) +") : Limits options on another goal "}
-	else if	(reduce_value < 0.5) return {"color": "#F2EBA5","text":"CONSISTENT ("+ d3.format("+.2g")(value) +") : No significant positive or negative interactions"}
-	else if	(reduce_value < 1.5) return {"color":"#C7D795", "text":"ENABLING ("+ d3.format("+.2g")(value) +") : Creates conditions that further another goal"}
-	else if	(reduce_value < 2.5) return {"color":"#99CA8E","text":"REINFORCING ("+ d3.format("+.2g")(value) +") : Aids the achievement of another goal"}
-	else return {"color":"#70B388","text":"INDIVISBLE ("+ d3.format("+.2g")(value) +") : Inextricably linked to the achievement of another goal"} //2.5 and above
+	if (reduce_value < -2.5) return {"color":"#9C4A56", "text":"CANCELLING ("+ d3.round(value,2) +") : Makes it impossible to reach another goal"}
+	else if	(reduce_value < - 1.5) return {"color":"#D6707D", "text": "COUNTERACTING ("+ d3.round(value,2) +"): Clashed with another goal "}
+	else if	(reduce_value < - 0.5)  return {"color":"#E8AD84", "text":"CONSTRAINING ("+ d3.round(value,2) +") : Limits options on another goal "}
+	else if	(reduce_value < 0.5) return {"color": "#F2EBA5","text":"CONSISTENT ("+ d3.round(value,2) +") : No significant positive or negative interactions"}
+	else if	(reduce_value < 1.5) return {"color":"#C7D795", "text":"ENABLING ("+ d3.round(value,2) +") : Creates conditions that further another goal"}
+	else if	(reduce_value < 2.5) return {"color":"#99CA8E","text":"REINFORCING ("+ d3.round(value,2) +") : Aids the achievement of another goal"}
+	else return {"color":"#70B388","text":"INDIVISBLE ("+ d3.round(value,2) +") : Inextricably linked to the achievement of another goal"} //2.5 and above
 	}
 
 
